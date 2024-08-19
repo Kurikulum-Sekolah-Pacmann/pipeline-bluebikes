@@ -1,0 +1,57 @@
+services:
+  pyspark:
+    hostname: pyspark
+    container_name: pyspark_container2
+    build: 
+       context: .
+       dockerfile: Dockerfile
+    image: pyspark_custom_pacmann
+    restart: on-failure
+    environment:
+      JUPYTER_ENABLE_LAB: "yes"
+    ports:
+      - 8888:8888
+      - 4040:4040
+    volumes:
+      - ./script:/home/jovyan/work
+    networks:
+      - my_network
+
+  source_db:
+    image: postgres:latest
+    hostname: source_db
+    container_name: source_db_container
+    restart: on-failure
+    environment:
+      - POSTGRES_DB=bluebikes
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=cobapassword
+    volumes:
+      - ./source_data/init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - 5433:5432 
+    networks:
+      - my_network
+
+  pipeline_db:
+    image: postgres:latest
+    hostname: pipeline_db
+    container_name: pipeline_db_container
+    restart: on-failure
+    environment:
+      - POSTGRES_DB=warehouse
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=cobapassword
+    volumes:
+      - ./pipeline_data/init.sql:/docker-entrypoint-initdb.d/01-init.sql
+      - ./pipeline_data/staging.sql:/docker-entrypoint-initdb.d/02-staging.sql
+      - ./pipeline_data/etl_log.sql:/docker-entrypoint-initdb.d/03-etl_log.sql
+      - ./pipeline_data/warehouse.sql:/docker-entrypoint-initdb.d/04-warehouse.sql
+    ports:
+      - 5435:5432 
+    networks:
+      - my_network
+  
+networks:
+  my_network:
+    driver: bridge
