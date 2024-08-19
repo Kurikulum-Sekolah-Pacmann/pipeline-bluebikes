@@ -39,6 +39,9 @@ def wh_engine():
 def wh_engine_sqlalchemy():
     return create_engine(f"postgresql://{DB_USER_TARGET}:{DB_PASS_TARGET}@{DB_HOST_TARGET}:{DB_PORT_TARGET}/{DB_NAME_WH}")
 
+def stg_engine_sqlalchemy():
+    return create_engine(f"postgresql://{DB_USER_TARGET}:{DB_PASS_TARGET}@{DB_HOST_TARGET}:{DB_PORT_TARGET}/{DB_NAME_STG}")
+
 def load_log(spark: SparkSession, log_msg):
     DB_URL, DB_USER, DB_PASS = log_engine()
     table_name = "etl_log"
