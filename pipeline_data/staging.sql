@@ -62,3 +62,52 @@ CREATE TABLE trip_data_2019 (
     gender varchar(255),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
  );
+
+CREATE VIEW combined_trip_data AS
+SELECT 
+    tripduration,
+    starttime,
+    stoptime,
+    "start station id",
+    "start station name",
+    "start station latitude",
+    "start station longitude",
+    "end station id",
+    "end station name",
+    "end station latitude",
+    "end station longitude",
+    bikeid,
+    usertype,
+    "birth year",
+    gender,
+    NULL AS "postal code",  -- Adding NULL for missing column
+    "year",
+    "month",
+    created_at
+FROM trip_data_2019
+WHERE usertype = 'Subscriber' AND tripduration::int > 500
+
+UNION
+
+SELECT 
+    tripduration,
+    starttime,
+    stoptime,
+    "start station id",
+    "start station name",
+    "start station latitude",
+    "start station longitude",
+    "end station id",
+    "end station name",
+    "end station latitude",
+    "end station longitude",
+    bikeid,
+    usertype,
+    "birth year",
+    gender,
+    "postal code",  -- Including the actual column
+    "year",
+    "month",
+    created_at
+FROM trip_data_2020
+WHERE usertype = 'Subscriber' AND tripduration::int > 500;

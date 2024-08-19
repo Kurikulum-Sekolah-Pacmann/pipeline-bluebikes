@@ -19,7 +19,7 @@ def load_warehouse(spark: SparkSession, df, table_name, source_name):
 
         with conn.connect() as connection:
             # Execute the TRUNCATE TABLE command
-            connection.execute(text(f"TRUNCATE TABLE {table_name} CASCADE RESTART IDENTITY"))
+            connection.execute(text(f"TRUNCATE TABLE {table_name} RESTART IDENTITY CASCADE "))
             connection.commit()
             connection.close()
         conn.dispose()
