@@ -16,20 +16,21 @@ This project aims to build a data pipeline for processing BlueBikes data. BlueBi
 to directory: ./script/data
 3. create your .env
 ``` 
-  DB_HOST="YOUR HOST"
-  DB_USER="USERNAME"
-  DB_PASS="PASS"
-  DB_PORT="PORT"
-  DB_NAME_CLINIC="clinic"
-  DB_NAME_CLINIC_OPS="clinic_ops"
-  DB_NAME_STG="staging_clinic"
-  DB_NAME_LOG="etl_log"
-  DB_NAME_WH="warehouse_clinic"
-  CRED_PATH='your_path/creds/creds.json'
-  KEY_SPREADSHEET='YOUR KEY SPREADSHEET'
-  ACCESS_KEY_MINIO = 'ACCESS KEY MINIO'
-  SECRET_KEY_MINIO = 'SECRET KEY MINIO'
-  MODEL_PATH_LOG_ETL='your_path/src/utils/model/'
+DB_HOST_SOURCE="CONTAINER NAME"
+DB_USER_SOURCE="USERNAME"
+DB_PASS_SOURCE="YOUR PASS"
+DB_PORT_SOURCE="5432"
+
+DB_HOST_TARGET="CONTAINER NAME"
+DB_USER_TARGET="USERNAME"
+DB_PASS_TARGET="YOUR PASS"
+DB_PORT_TARGET="5432"
+
+
+DB_NAME_BLUEBIKES="bluebikes"
+DB_NAME_STG="staging"
+DB_NAME_LOG="etl_log"
+DB_NAME_WH="warehouse"
 ```
 
 ## Usage
