@@ -9,7 +9,7 @@ This project aims to build a data pipeline for processing BlueBikes data. BlueBi
 - Database integration for storing processed data
 
 ## Installation
-1. Clone the repository: `git clone https://github.com/your-username/bluebikes-data-pipeline.git`
+1. Clone the repository: `https://github.com/Kurikulum-Sekolah-Pacmann/pipeline-bluebikes.git`
   - Build: docker compose up --build --detach
   - Copy Driver: docker cp driver/postgresql-42.6.0.jar pyspark_container2:/usr/local/spark/jars/postgresql-42.6.0.jar
 2. Copy data from  **Bluebikes Trip Data CSV**: [Link to Dataset](https://www.kaggle.com/datasets/jackdaoud/bluebikes-in-boston)
